@@ -1,0 +1,17 @@
+.env
+.env.example
+.pytest_cache
+__pycache__
+*.pyc
+.git
+.gitignore
+*.md
+alembic
+alembic.ini
+pytest.ini
+tests
+seed.py
+*.egg-info
+.venv
+app
+
