@@ -4,9 +4,9 @@ from datetime import datetime, timedelta
 from typing import List
 from sqlalchemy import func
 
-from backend.app.db.session import get_db
-from backend.app.db.models import TrafficReading, Incident, Junction, IncidentStatus, AIRecommendation, RecommendationStatus
-from backend.app.schemas.schemas import CitySummaryOut, JunctionRankingOut, EmissionsOut
+from app.db.session import get_db
+from app.db.models import TrafficReading, Incident, Junction, IncidentStatus, AIRecommendation, RecommendationStatus
+from app.schemas.schemas import CitySummaryOut, JunctionRankingOut, EmissionsOut
 
 router = APIRouter(prefix="/analytics", tags=["Analytics"])
 

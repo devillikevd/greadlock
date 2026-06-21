@@ -2,7 +2,7 @@ import enum
 from datetime import datetime
 from sqlalchemy import Column, Integer, String, Float, DateTime, ForeignKey, Enum as SQLEnum, JSON
 from sqlalchemy.orm import relationship
-from backend.app.db.session import Base
+from app.db.session import Base
 
 # Enums matching database design
 class UserRole(str, enum.Enum):

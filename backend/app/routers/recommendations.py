@@ -2,9 +2,9 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 from typing import List, Optional
 
-from backend.app.db.session import get_db
-from backend.app.db.models import AIRecommendation, RecommendationStatus, RecommendationPriority
-from backend.app.schemas.schemas import RecommendationOut
+from app.db.session import get_db
+from app.db.models import AIRecommendation, RecommendationStatus, RecommendationPriority
+from app.schemas.schemas import RecommendationOut
 
 router = APIRouter(prefix="/recommendations", tags=["Recommendations"])
 

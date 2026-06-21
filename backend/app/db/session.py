@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
 from sqlalchemy.orm import sessionmaker, declarative_base
 from sqlalchemy import create_engine
-from backend.app.config import settings
+from app.config import settings
 
 # Determine if we're using SQLite (e.g. for testing)
 IS_SQLITE = settings.DATABASE_URL.startswith("sqlite")

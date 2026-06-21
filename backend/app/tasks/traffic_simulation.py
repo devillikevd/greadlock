@@ -3,13 +3,13 @@ import json
 import logging
 import random
 from datetime import datetime, timedelta
-from backend.app.tasks.celery_app import celery_app
-from backend.app.db.session import SyncSessionLocal
-from backend.app.db.models import (
+from app.tasks.celery_app import celery_app
+from app.db.session import SyncSessionLocal
+from app.db.models import (
     Junction, TrafficReading, Incident, IncidentType, Severity, IncidentStatus,
     AIRecommendation, RecommendationPriority, RecommendationStatus
 )
-from backend.app.config import settings
+from app.config import settings
 
 logger = logging.getLogger(__name__)
 
@@ -36,7 +36,7 @@ def run_traffic_simulation():
     """
     db = SyncSessionLocal()
     try:
-        from backend.seed import generate_reading
+        from seed import generate_reading
         
         junctions = db.query(Junction).all()
         now = datetime.utcnow()

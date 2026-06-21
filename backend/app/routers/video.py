@@ -5,10 +5,10 @@ import tempfile
 import os
 from typing import Optional
 
-from backend.app.db.session import get_db
-from backend.app.db.models import Junction, TrafficReading
-from backend.app.schemas.schemas import VideoAnalyzeResult
-from backend.app.services.yolo import yolo_service
+from app.db.session import get_db
+from app.db.models import Junction, TrafficReading
+from app.schemas.schemas import VideoAnalyzeResult
+from app.services.yolo import yolo_service
 
 router = APIRouter(prefix="/video", tags=["Video"])
 
