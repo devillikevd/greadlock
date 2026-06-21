@@ -27,14 +27,11 @@ async def lifespan(app: FastAPI):
     logger.info("FastAPI server starting. Initializing AI Prediction models...")
     db = SyncSessionLocal()
     try:
-        # Try training models on seeded historical data
-        trained = prediction_service.train_models(db)
-        if trained:
-            logger.info("Machine Learning models successfully fitted on startup.")
-        else:
-            logger.warning("ML models could not be fitted on startup. Using heuristic fallbacks.")
+        # Startup training is disabled on lower-memory hosts to reduce RAM usage.
+        # Models will be trained lazily when actual prediction requests are processed.
+        logger.info("Skipping startup ML training to reduce memory usage on constrained hosts.")
     except Exception as e:
-        logger.error(f"Error during startup ML model training: {e}")
+        logger.error(f"Error during startup initialization: {e}")
     finally:
         db.close()
         

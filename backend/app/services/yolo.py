@@ -6,31 +6,33 @@ from typing import Dict, Any, List
 
 logger = logging.getLogger(__name__)
 
-# Try importing cv2 and ultralytics
-HAS_YOLO = False
-try:
-    import cv2
-    import torch
-    # Monkeypatch torch.load to default to weights_only=False for PyTorch 2.6+ compatibility with ultralytics checkpoints
-    original_load = torch.load
-    torch.load = lambda *args, **kwargs: original_load(*args, **{**kwargs, "weights_only": False})
-    
-    from ultralytics import YOLO
-    HAS_YOLO = True
-except ImportError:
-    logger.warning("ultralytics or opencv-python-headless not available. Using high-fidelity video processing simulation.")
-
 class VideoAnalysisService:
     def __init__(self):
         self.model = None
-        if HAS_YOLO:
-            try:
-                # Load YOLOv8 Nano model (pretrained on COCO)
-                # It will download automatically on first use
-                self.model = YOLO("yolov8n.pt")
-                logger.info("YOLOv8n model initialized successfully.")
-            except Exception as e:
-                logger.error(f"Error loading YOLOv8 model: {e}. Falling back to simulation.")
+        self.cv2 = None
+        self.yolo_available = None
+
+    def _ensure_model(self):
+        if self.yolo_available is False:
+            return
+n        if self.model is not None and self.cv2 is not None:
+            return
+
+        try:
+            import cv2
+            import torch
+            # Monkeypatch torch.load to default to weights_only=False for PyTorch 2.6+ compatibility with ultralytics checkpoints
+            original_load = torch.load
+            torch.load = lambda *args, **kwargs: original_load(*args, **{**kwargs, "weights_only": False})
+
+            from ultralytics import YOLO
+            self.cv2 = cv2
+            self.model = YOLO("yolov8n.pt")
+            self.yolo_available = True
+            logger.info("YOLOv8n model initialized successfully.")
+        except Exception as e:
+            self.yolo_available = False
+            logger.warning("ultralytics or opencv-python-headless not available or failed to load. Using high-fidelity video processing simulation. %s", e)
 
     def analyze_video(self, video_path: str, rtsp_url: str = None) -> Dict[str, Any]:
         """
@@ -40,14 +42,16 @@ class VideoAnalysisService:
         """
         start_time = time.time()
         
+        self._ensure_model()
+
         # If running in simulation mode
-        if not HAS_YOLO or not self.model:
+        if not self.yolo_available or not self.model or not self.cv2:
             return self._simulate_analysis(video_path or rtsp_url, start_time)
             
         try:
             # Open video stream
             source = rtsp_url if rtsp_url else video_path
-            cap = cv2.VideoCapture(source)
+            cap = self.cv2.VideoCapture(source)
             if not cap.isOpened():
                 return {"error": f"Failed to open video source: {source}"}
                 
