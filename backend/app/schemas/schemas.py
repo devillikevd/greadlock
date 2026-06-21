@@ -1,7 +1,7 @@
 from pydantic import BaseModel, EmailStr, Field
 from datetime import datetime
 from typing import List, Optional, Dict, Any
-from backend.app.db.models import UserRole, IncidentType, Severity, IncidentStatus, RecommendationPriority, RecommendationStatus, SignalMode, CorridorStatus
+from app.db.models import UserRole, IncidentType, Severity, IncidentStatus, RecommendationPriority, RecommendationStatus, SignalMode, CorridorStatus
 
 # --- AUTH SCHEMAS ---
 class LoginRequest(BaseModel):

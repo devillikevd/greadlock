@@ -2,10 +2,10 @@ from fastapi import APIRouter, Depends, HTTPException, Body
 from sqlalchemy.orm import Session
 from datetime import datetime
 
-from backend.app.db.session import get_db
-from backend.app.db.models import SignalTiming, TrafficReading, Junction, SignalMode
-from backend.app.schemas.schemas import SignalTimingOut, SignalOptimizeResult, SignalSimulateResult
-from backend.app.services.signal_optimizer import optimize_signal_timing
+from app.db.session import get_db
+from app.db.models import SignalTiming, TrafficReading, Junction, SignalMode
+from app.schemas.schemas import SignalTimingOut, SignalOptimizeResult, SignalSimulateResult
+from app.services.signal_optimizer import optimize_signal_timing
 
 router = APIRouter(prefix="/signals", tags=["Signals"])
 

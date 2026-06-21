@@ -2,10 +2,10 @@ from fastapi import APIRouter, Depends, HTTPException, Body
 from sqlalchemy.orm import Session
 from typing import List
 
-from backend.app.db.session import get_db
-from backend.app.db.models import EmergencyCorridor, CorridorStatus
-from backend.app.schemas.schemas import EmergencyCorridorCreate, EmergencyCorridorOut
-from backend.app.services.emergency_corridor import emergency_service
+from app.db.session import get_db
+from app.db.models import EmergencyCorridor, CorridorStatus
+from app.schemas.schemas import EmergencyCorridorCreate, EmergencyCorridorOut
+from app.services.emergency_corridor import emergency_service
 
 router = APIRouter(prefix="/emergency", tags=["Emergency"])
 

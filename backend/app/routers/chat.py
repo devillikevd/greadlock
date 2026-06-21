@@ -2,10 +2,10 @@ from fastapi import APIRouter, Depends, HTTPException
 from typing import List, Dict, Any, Optional
 import time
 
-from backend.app.schemas.schemas import MessageRequest, MessageResponse, ChatHistoryItem, ChatJunctionData
-from backend.app.services.gemini import gemini_agent
-from backend.app.db.session import get_db
-from backend.app.db.models import Junction, TrafficReading
+from app.schemas.schemas import MessageRequest, MessageResponse, ChatHistoryItem, ChatJunctionData
+from app.services.gemini import gemini_agent
+from app.db.session import get_db
+from app.db.models import Junction, TrafficReading
 
 router = APIRouter(prefix="/chat", tags=["Chat"])
 
