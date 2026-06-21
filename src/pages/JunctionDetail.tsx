@@ -2,6 +2,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { ArrowLeft, Camera, CheckCircle2, XCircle, Clock, User } from 'lucide-react';
 import { useAppStore } from '../store/useAppStore';
+import { WS_BASE_URL, API_BASE_URL } from '../config';
 import { DensityGauge } from '../components/DensityGauge';
 import { PredictionChart } from '../components/PredictionChart';
 import {
@@ -59,12 +60,12 @@ export function JunctionDetail() {
     const fetchDetails = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`http://localhost:8000/junctions/${id}`);
+        const res = await fetch(`${API_BASE_URL}/junctions/${id}`);
         if (!res.ok) throw new Error("Failed to fetch details");
         const details = await res.json();
         
         // Fetch predictions
-        const predRes = await fetch(`http://localhost:8000/junctions/${id}/predictions`);
+        const predRes = await fetch(`${API_BASE_URL}/junctions/${id}/predictions`);
         let predictions: any = null;
         if (predRes.ok) {
           predictions = await predRes.json();
@@ -126,7 +127,7 @@ export function JunctionDetail() {
 
   useEffect(() => {
     if (!id) return;
-    const ws = new WebSocket(`ws://localhost:8000/ws/${id}`);
+    const ws = new WebSocket(`${WS_BASE_URL}/ws/${id}`);
     
     ws.onmessage = (event) => {
       try {

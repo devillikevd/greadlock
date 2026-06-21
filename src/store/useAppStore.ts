@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { API_BASE_URL } from '../config';
 
 export type UserRole = 'constable' | 'inspector' | 'acp' | 'commissioner' | 'public';
 
@@ -307,7 +308,7 @@ export const useAppStore = create<AppStore>()(
 
   dismissAlert: async (id) => {
     try {
-      await fetch(`http://localhost:8000/recommendations/${id}/dismiss`, { method: "POST" });
+      await fetch(`${API_BASE_URL}/recommendations/${id}/dismiss`, { method: "POST" });
     } catch (e) {
       console.warn("Backend offline, dismissing alert locally", e);
     }
@@ -318,7 +319,7 @@ export const useAppStore = create<AppStore>()(
 
   deployAlert: async (id) => {
     try {
-      await fetch(`http://localhost:8000/recommendations/${id}/deploy`, { method: "POST" });
+      await fetch(`${API_BASE_URL}/recommendations/${id}/deploy`, { method: "POST" });
     } catch (e) {
       console.warn("Backend offline, deploying alert locally", e);
     }
@@ -338,7 +339,7 @@ export const useAppStore = create<AppStore>()(
   setChatLanguage: (lang) => set({ chatLanguage: lang }),
   fetchData: async () => {
     try {
-      const res = await fetch("http://localhost:8000/junctions");
+      const res = await fetch(`${API_BASE_URL}/junctions`);
       if (res.ok) {
         const data = await res.json();
         const junctions = data.map((j: any) => {
@@ -373,7 +374,7 @@ export const useAppStore = create<AppStore>()(
         set({ junctions });
       }
       
-      const aRes = await fetch("http://localhost:8000/recommendations?status=pending");
+      const aRes = await fetch(`${API_BASE_URL}/recommendations?status=pending`);
       if (aRes.ok) {
         const recs = await aRes.json();
         const alerts = recs.map((r: any) => ({

@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Send, Mic, Bot, User, Plus } from 'lucide-react';
 import { useAppStore } from '../store/useAppStore';
+import { API_BASE_URL } from '../config';
 
 const STARTERS = [
   'Silk Board traffic status?',
@@ -71,7 +72,7 @@ export function AIChat() {
     setIsTyping(true);
 
     try {
-      const res = await fetch("http://localhost:8000/chat/message", {
+      const res = await fetch(`${API_BASE_URL}/chat/message`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

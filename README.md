@@ -100,6 +100,34 @@ npm run build
 vercel --prod
 ```
 
+### Render Deployment (Full Stack)
+
+A Render deployment configuration has been added in `render.yaml` to deploy both the frontend and backend as separate web services.
+
+The Render services use:
+- frontend: `npm install && npm run build`, `npm run preview -- --host 0.0.0.0 --port 10000`
+- backend: `pip install -r backend/requirements.txt`, `uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT`
+
+#### Render deployment steps
+
+1. Push the repository to GitHub.
+2. Open https://render.com and connect your GitHub account to the repo.
+3. Create services from `render.yaml` or add them manually:
+   - Frontend service: `Node` environment.
+   - Backend service: `Python` environment.
+4. Set the backend service URL as `VITE_API_BASE_URL` in the frontend service environment.
+5. Configure backend environment variables in Render:
+   - `DATABASE_URL`
+   - `DATABASE_SYNC_URL`
+   - `REDIS_URL`
+   - `GEMINI_API_KEY`
+   - `SECRET_KEY`
+   - `OPENWEATHER_API_KEY`
+6. Deploy and test the frontend against the live backend URL.
+
+> Note: `render.yaml` currently includes placeholder database/Redis values. Replace them with your actual Render-managed Postgres/Redis or external service URLs.
+
+
 ---
 
 ## 🛠️ Feature Breakdown

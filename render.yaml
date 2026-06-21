@@ -1,0 +1,32 @@
+services:
+  - type: static
+    name: ai-traffic-management-frontend
+    env: node
+    plan: starter
+    region: ord
+    buildCommand: npm install && npm run build
+    publishPath: dist
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: "https://your-backend-service.onrender.com"
+    autoDeploy: true
+  - type: web
+    name: ai-traffic-management-backend
+    env: docker
+    plan: starter
+    region: ord
+    dockerfilePath: backend/Dockerfile
+    envVars:
+      - key: DATABASE_URL
+        value: "postgresql+asyncpg://postgres:postgres@localhost:5432/traffic_db"
+      - key: DATABASE_SYNC_URL
+        value: "postgresql://postgres:postgres@localhost:5432/traffic_db"
+      - key: REDIS_URL
+        value: "redis://localhost:6379/0"
+      - key: GEMINI_API_KEY
+        value: "mock-key"
+      - key: SECRET_KEY
+        value: "4eb8d9bfd68e596da34b45efea01c80f123456789abcdef0123456789abcdef"
+      - key: OPENWEATHER_API_KEY
+        value: ""
+    autoDeploy: true

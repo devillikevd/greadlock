@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Play, ChevronDown, TrendingDown, TrendingUp, Wind } from 'lucide-react';
 import { useAppStore } from '../store/useAppStore';
+import { API_BASE_URL } from '../config';
 
 function TrafficSignalSVG({ mode, north, east }: { mode: 'fixed' | 'ai'; north?: number; east?: number }) {
   const phases = mode === 'ai'
@@ -118,7 +119,7 @@ export function SignalSimulator() {
     }, 100);
 
     try {
-      const res = await fetch("http://localhost:8000/signals/simulate", {
+      const res = await fetch(`${API_BASE_URL}/signals/simulate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ junction_id: selectedJunction })

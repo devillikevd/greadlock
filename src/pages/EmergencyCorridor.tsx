@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Siren, MapPin, Clock, MessageSquare, CheckCircle2, Play, AlertTriangle, Trash2, ArrowRight } from 'lucide-react';
 import { useAppStore } from '../store/useAppStore';
+import { API_BASE_URL } from '../config';
 
 interface RouteStep {
   junction_id: string;
@@ -57,7 +58,7 @@ export function EmergencyCorridor() {
     setErrorMsg('');
     const startLoc = START_LOCATIONS[startLocIndex];
     try {
-      const res = await fetch("http://localhost:8000/emergency/corridor", {
+      const res = await fetch(`${API_BASE_URL}/emergency/corridor`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -110,7 +111,7 @@ export function EmergencyCorridor() {
   const handleDeactivate = async () => {
     if (!activeCorridor) return;
     try {
-      await fetch(`http://localhost:8000/emergency/corridor/${activeCorridor.corridor_id}`, {
+      await fetch(`${API_BASE_URL}/emergency/corridor/${activeCorridor.corridor_id}`, {
         method: "DELETE"
       });
     } catch (e) {
