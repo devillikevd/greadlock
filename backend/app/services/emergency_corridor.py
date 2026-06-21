@@ -3,7 +3,7 @@ import math
 from datetime import datetime
 from typing import List, Dict, Any, Optional
 from sqlalchemy.orm import Session
-from backend.app.db.models import EmergencyCorridor, SignalTiming, SignalMode, Junction, CorridorStatus
+from app.db.models import EmergencyCorridor, SignalTiming, SignalMode, Junction, CorridorStatus
 
 logger = logging.getLogger(__name__)
 

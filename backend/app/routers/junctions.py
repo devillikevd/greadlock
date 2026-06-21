@@ -3,10 +3,10 @@ from sqlalchemy.orm import Session
 from datetime import datetime, timedelta
 from typing import List, Dict, Any
 
-from backend.app.db.session import get_db
-from backend.app.db.models import Junction, TrafficReading, Incident, IncidentStatus
-from backend.app.schemas.schemas import JunctionOut, JunctionDetailOut, ReadingOut, PredictionsOut, LaneInfo
-from backend.app.services.prediction import prediction_service
+from app.db.session import get_db
+from app.db.models import Junction, TrafficReading, Incident, IncidentStatus
+from app.schemas.schemas import JunctionOut, JunctionDetailOut, ReadingOut, PredictionsOut, LaneInfo
+from app.services.prediction import prediction_service
 
 router = APIRouter(prefix="/junctions", tags=["Junctions"])
 

@@ -1,6 +1,6 @@
 import pytest
 from datetime import datetime
-from backend.app.db.models import IncidentType, Severity, IncidentStatus
+from app.db.models import IncidentType, Severity, IncidentStatus
 
 pytestmark = pytest.mark.asyncio
 

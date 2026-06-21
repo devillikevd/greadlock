@@ -9,10 +9,10 @@ from fastapi import FastAPI, WebSocket, WebSocketDisconnect, Depends
 from fastapi.middleware.cors import CORSMiddleware
 import redis.asyncio as async_redis
 
-from backend.app.config import settings
-from backend.app.db.session import SyncSessionLocal
-from backend.app.routers import auth, junctions, incidents, recommendations, signals, emergency, analytics, chat, video
-from backend.app.services.prediction import prediction_service
+from app.config import settings
+from app.db.session import SyncSessionLocal
+from app.routers import auth, junctions, incidents, recommendations, signals, emergency, analytics, chat, video
+from app.services.prediction import prediction_service
 
 # Logging Setup
 logging.basicConfig(level=logging.INFO)
@@ -129,10 +129,10 @@ async def websocket_endpoint(websocket: WebSocket, junction_id: str):
     except Exception as e:
         logger.warning(f"Redis not available for WebSockets: {e}. Falling back to active DB simulator.")
         # Fallback loop: queries the database and generates periodic simulated readings
-        from backend.seed import generate_reading
+        from seed import generate_reading
         
         db = SyncSessionLocal()
-        from backend.app.db.models import Junction
+        from app.db.models import Junction
         j = db.query(Junction).filter(Junction.id == junction_id).first()
         capacity = j.road_capacity if j else 2000
         db.close()

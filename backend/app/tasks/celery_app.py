@@ -1,5 +1,5 @@
 from celery import Celery
-from backend.app.config import settings
+from app.config import settings
 
 celery_app = Celery(
     "traffic_tasks",
