@@ -36,3 +36,5 @@ __pycache__/
 
 # Ignore nested duplicate project copy
 /AI Traffic Management/
+
+.vercel
