@@ -1,15 +1,4 @@
 services:
-  - type: static
-    name: ai-traffic-management-frontend
-    env: node
-    plan: starter
-    region: ord
-    buildCommand: npm install && npm run build
-    publishPath: dist
-    envVars:
-      - key: VITE_API_BASE_URL
-        value: "https://your-backend-service.onrender.com"
-    autoDeploy: true
   - type: web
     name: ai-traffic-management-backend
     env: docker

@@ -112,20 +112,18 @@ The Render services use:
 
 1. Push the repository to GitHub.
 2. Open https://render.com and connect your GitHub account to the repo.
-3. Create services from `render.yaml` or add them manually:
-   - Frontend service: `Node` environment.
-   - Backend service: `Python` environment.
-4. Set the backend service URL as `VITE_API_BASE_URL` in the frontend service environment.
-5. Configure backend environment variables in Render:
+3. Use `render.yaml` to deploy the backend-only service:
+   - Backend service: `Web Service` with `Docker` environment.
+4. Configure backend environment variables in Render:
    - `DATABASE_URL`
    - `DATABASE_SYNC_URL`
    - `REDIS_URL`
    - `GEMINI_API_KEY`
    - `SECRET_KEY`
    - `OPENWEATHER_API_KEY`
-6. Deploy and test the frontend against the live backend URL.
+5. Deploy the backend service.
 
-> Note: `render.yaml` currently includes placeholder database/Redis values. Replace them with your actual Render-managed Postgres/Redis or external service URLs.
+> Note: This Render deployment is backend-only. The frontend is not deployed by Render here and should continue to use your existing Vercel deployment or a separate frontend hosting setup.
 
 
 ---
