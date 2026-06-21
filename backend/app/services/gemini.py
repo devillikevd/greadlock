@@ -6,12 +6,12 @@ from typing import List, Dict, Any, Optional
 from sqlalchemy.orm import Session
 from sqlalchemy import or_
 
-from backend.app.config import settings
-from backend.app.db.session import SyncSessionLocal
-from backend.app.db.models import Junction, TrafficReading, Incident, SignalTiming, EmergencyCorridor, IncidentStatus, IncidentType, Severity
-from backend.app.services.prediction import prediction_service
-from backend.app.services.signal_optimizer import optimize_signal_timing
-from backend.app.services.emergency_corridor import emergency_service
+from app.config import settings
+from app.db.session import SyncSessionLocal
+from app.db.models import Junction, TrafficReading, Incident, SignalTiming, EmergencyCorridor, IncidentStatus, IncidentType, Severity
+from app.services.prediction import prediction_service
+from app.services.signal_optimizer import optimize_signal_timing
+from app.services.emergency_corridor import emergency_service
 
 logger = logging.getLogger(__name__)
 

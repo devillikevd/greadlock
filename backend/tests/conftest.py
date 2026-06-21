@@ -11,9 +11,9 @@ os.environ["DATABASE_SYNC_URL"] = "sqlite:///file:testdb?mode=memory&cache=share
 os.environ["REDIS_URL"] = "redis://localhost:6379/9"
 os.environ["GEMINI_API_KEY"] = "mock-key-for-tests"
 
-from backend.app.main import app
-from backend.app.db.session import get_db, Base
-from backend.app.db.models import User, UserRole, Junction, Officer, TrafficReading
+from app.main import app
+from app.db.session import get_db, Base
+from app.db.models import User, UserRole, Junction, Officer, TrafficReading
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 

@@ -5,11 +5,11 @@ from alembic import context
 
 import sys
 import os
-# Add the project root to path
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+# Add the backend directory to path so app.* imports resolve correctly
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from backend.app.config import settings
-from backend.app.db.models import Base
+from app.config import settings
+from app.db.models import Base
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

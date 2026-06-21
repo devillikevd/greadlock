@@ -6,11 +6,11 @@ import math
 from sqlalchemy import text
 import bcrypt
 
-# Add project root to python path to import models
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# Add the backend directory to path so app.* imports resolve correctly
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from backend.app.db.session import sync_engine, SyncSessionLocal, Base
-from backend.app.db.models import (
+from app.db.session import sync_engine, SyncSessionLocal, Base
+from app.db.models import (
     User, UserRole, Officer, Junction, TrafficReading, 
     Incident, IncidentType, Severity, IncidentStatus,
     AIRecommendation, RecommendationPriority, RecommendationStatus,

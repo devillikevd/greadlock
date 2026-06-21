@@ -88,7 +88,7 @@ class TrafficPredictionService:
             
         try:
             logger.info("Starting ML model training...")
-            from backend.app.db.models import TrafficReading
+            from app.db.models import TrafficReading
             
             # Fetch last 14 days of data to train quickly
             cutoff = datetime.utcnow() - timedelta(days=14)
